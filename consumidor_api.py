@@ -7,12 +7,12 @@ import requests # BIBLIOTECA REQUESTS SIMPLIFICA AS REQUISIÇÕES HTTP EM PYTHON
 import os
 from dotenv import load_dotenv # BIBLIOTECA DOTENV PARA PEGAR CREDENCIAIS PRIVADAS NO .ENV
 
-url = os.getenv("database")
+url = "https://api.open-meteo.com/v1/forecast"
 
 parametros = { # PARÂMETROS SÃO INFORMAÇÕES ENVIADAS PARA DEFINIR O CONTEÚDO SOLICITADO
-    "longitude": -48.8456,
     "latitude": -26.3044,
-    "current": "temperature_2m, relative_humidity_2m, apparent_temperature, time"}
+    "longitude": -48.8456,
+    "current": "temperature_2m"}
 
 
 resposta = requests.get(
@@ -20,12 +20,7 @@ resposta = requests.get(
     params=parametros,
     timeout=15
 )
+dados = resposta.json()
 
-resposta.raise_for_status()dados = resposta.json()
-
-
-
-
-
-
-
+print (resposta)
+print (dados)
